@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+option go_package = "./e_commerce";
+
+// The service definition.
+service CategoryService{
+    rpc CreateCategory(CreateCategoryRequest)returns(Category){}
+    rpc UpdateCategory(UpdateCategoryRequest)returns(Category){}
+    rpc DeleteCategory(DeleteCategoryRequest)returns(Category){}
+    rpc GetCategoryById(GetCategoryByIdRequest)returns(GetCategoryByIdResponse){}
+    rpc GetCategoryList(GetCategoryListRequest)returns(GetCategoryListResponse){}
+}
+
+message CreateCategoryRequest{
+    string category_title = 1;
+}
+
+message UpdateCategoryRequest{
+    string id = 1;
+    string category_title = 2;
+}
+
+message DeleteCategoryRequest{
+    string id = 1;
+}
+
+message GetCategoryByIdRequest{
+    string id = 1;
+}
+
+message GetCategoryByIdResponse{
+    string id = 1;
+    string category_title = 2;
+    string created_at = 3;
+    string updated_at = 4;
+}
+
+message Category{
+    string id = 1;
+    string category_title = 2;
+    string created_at = 3;
+    string updated_at = 4;
+}
+
+message GetCategoryListRequest{
+    int32 offset = 1;
+    int32 limit = 2;
+    string search = 3;
+}
+
+message GetCategoryListResponse{
+    repeated Category categories = 1;
+}
